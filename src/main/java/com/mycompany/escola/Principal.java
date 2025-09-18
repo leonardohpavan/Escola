@@ -18,6 +18,7 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -75,7 +76,7 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
-                        .addGap(62, 62, 62)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTNome, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                             .addComponent(jTEmail)
@@ -121,7 +122,9 @@ public class Principal extends javax.swing.JFrame {
                             jTTelefone.getText(), jTNascimento.getText());
         
         
-        JOptionPane.showMessageDialog(rootPane, a.getNome());
+        Resultado r = new Resultado(a);
+        r.setVisible(true);
+        r.setLocationRelativeTo(this);
     }//GEN-LAST:event_jBCadastrarActionPerformed
 
     /**

@@ -15,6 +15,13 @@ public class Aluno {
     private String telefone;
     private String dataNascimento;
 
+    public Aluno(String nome, String email, String telefone, String dataNascimento) {
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
+        this.dataNascimento = dataNascimento;
+    }
+
     public String getNome() {
         return nome;
     }
