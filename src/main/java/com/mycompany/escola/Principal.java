@@ -5,7 +5,11 @@
 package com.mycompany.escola;
 
 import Objetos.Aluno;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -19,6 +23,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
+        formatarCampo();
     }
 
     /**
@@ -37,9 +42,9 @@ public class Principal extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jTNome = new javax.swing.JTextField();
         jTEmail = new javax.swing.JTextField();
-        jTTelefone = new javax.swing.JTextField();
-        jTNascimento = new javax.swing.JTextField();
         jBCadastrar = new javax.swing.JButton();
+        jFTelefone = new javax.swing.JFormattedTextField();
+        jFNascimento = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,10 +65,25 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jFTelefone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFTelefoneActionPerformed(evt);
+            }
+        });
+
+        jFNascimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFNascimentoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jBCadastrar))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -78,14 +98,11 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTNome, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(jFNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                            .addComponent(jFTelefone)
                             .addComponent(jTEmail)
-                            .addComponent(jTTelefone)
-                            .addComponent(jTNascimento))))
-                .addContainerGap(33, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jBCadastrar))
+                            .addComponent(jTNome))))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,11 +121,11 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jBCadastrar)
                 .addContainerGap(54, Short.MAX_VALUE))
@@ -116,16 +133,35 @@ public class Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void formatarCampo(){
+    MaskFormatter mask;
+        try {
+            mask = new MaskFormatter("(**)*****-****");
+            mask.install(jFTelefone);
+            mask = new MaskFormatter("**/**/****");
+            mask.install(jFNascimento);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao formatar campo de texto.", "ERRO", JOptionPane.ERROR);
+        }
+    
+}
     private void jBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarActionPerformed
         Aluno a = new Aluno(jTNome.getText(), jTEmail.getText(),
-                            jTTelefone.getText(), jTNascimento.getText());
+                            jFTelefone.getText(), jFNascimento.getText());
         
         
         Resultado r = new Resultado(a);
         r.setVisible(true);
         r.setLocationRelativeTo(this);
     }//GEN-LAST:event_jBCadastrarActionPerformed
+
+    private void jFNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFNascimentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFNascimentoActionPerformed
+
+    private void jFTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFTelefoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFTelefoneActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,14 +200,14 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCadastrar;
+    private javax.swing.JFormattedTextField jFNascimento;
+    private javax.swing.JFormattedTextField jFTelefone;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jTEmail;
-    private javax.swing.JTextField jTNascimento;
     private javax.swing.JTextField jTNome;
-    private javax.swing.JTextField jTTelefone;
     // End of variables declaration//GEN-END:variables
 }
